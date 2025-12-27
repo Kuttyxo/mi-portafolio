@@ -1,3 +1,4 @@
+import { keyframes } from "framer-motion";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -8,6 +9,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      animation: {
+        scan: "scan 32s linear infinite",
+      },
+      keyframes: {
+        scan: {
+          "0%": { top: "0%" },
+          "100%": { top: "100%"},
+        },
+      },
       colors: {
         // Tu paleta de marca "KuttyDev"
         kutty: {
