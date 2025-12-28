@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import BentoGrid from "@/components/BentoGrid";
 import Projects from "@/components/Projects"; 
+import Experience from "@/components/Experience";
 
 export default function Home() {
   return (
@@ -10,14 +11,10 @@ export default function Home() {
       
       <Navbar />
       
-      {/* === AJUSTE DE ESPACIO === 
-          Cambiado de 'pt-36' (144px) a:
-          - pt-24 (96px): En móvil sube bastante para quedar cerca del menú.
-          - md:pt-32 (128px): En escritorio da el aire justo para el dock flotante.
-      */}
       <div className="relative z-10 pt-12 md:pt-14 pb-20 px-4 md:px-8 space-y-32">
         <BentoGrid />
         <Projects /> 
+        <Experience />
       </div>
     </main>
   );
