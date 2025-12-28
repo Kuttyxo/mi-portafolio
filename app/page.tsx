@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import BentoGrid from "@/components/BentoGrid";
 import Projects from "@/components/Projects"; 
 import Experience from "@/components/Experience";
+import Contact from "@/components/Contact"; 
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <BentoGrid />
         <Projects /> 
         <Experience />
+        <Contact />
       </div>
     </main>
   );

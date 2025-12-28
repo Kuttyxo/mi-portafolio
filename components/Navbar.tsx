@@ -27,6 +27,17 @@ export default function Navbar() {
   const [active, setActive] = useState("_home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // FUNCIÓN MAGICA PARA SCROLL SUAVE
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault(); // Evita que Next.js intente cambiar la URL
+    setIsMobileMenuOpen(false); // Cierra el menú móvil si está abierto
+    
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+        contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <motion.header
       initial={{ y: -100, opacity: 0 }}
@@ -37,7 +48,7 @@ export default function Navbar() {
       {/* === DOCK PRINCIPAL === */}
       <div className="pointer-events-auto relative flex items-center justify-between gap-2 p-2 rounded-2xl bg-black/80 border border-white/10 backdrop-blur-xl shadow-2xl shadow-black/50 ring-1 ring-white/5 w-full max-w-sm md:max-w-fit transition-all duration-300">
         
-        {/* 1. LOGO (Izquierda) */}
+        {/* 1. LOGO */}
         <Link 
           href="/" 
           onClick={() => setIsMobileMenuOpen(false)}
@@ -53,12 +64,11 @@ export default function Navbar() {
            />
         </Link>
 
-        {/* 2. BARRA CENTRAL (SOLO MÓVIL) - Rellena el espacio vacío */}
+        {/* 2. BARRA CENTRAL (SOLO MÓVIL) */}
         <div className="flex md:hidden flex-1 justify-center px-2">
            <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/5 w-full justify-center shadow-inner">
               <span className="text-green-500 text-[10px]">➜</span>
               <span className="text-neutral-400 text-xs font-mono tracking-wide">~/portfolio</span>
-              {/* Cursor parpadeante estilo terminal */}
               <span className="w-1.5 h-3 bg-kutty-primary animate-pulse" />
            </div>
         </div>
@@ -111,11 +121,15 @@ export default function Navbar() {
                 SYS:ONLINE
             </div>
 
-            {/* Contacto (Solo PC) */}
-            <button className="hidden md:flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-black text-xs font-bold font-mono hover:bg-neutral-200 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+            {/* Contacto (Solo PC) - Usamos etiqueta <a> con onClick manual */}
+            <a 
+              href="#contact"
+              onClick={handleScroll}
+              className="hidden md:flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-black text-xs font-bold font-mono hover:bg-neutral-200 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.1)] cursor-pointer"
+            >
                 <Mail size={14} />
                 <span>CONTACT.sh</span>
-            </button>
+            </a>
 
             {/* Botón Hamburguesa (Solo Móvil) */}
             <button 
@@ -165,10 +179,15 @@ export default function Navbar() {
                 
                 <div className="h-[1px] bg-white/10 my-1 mx-2" />
 
-                <button className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl bg-kutty-primary/20 text-kutty-primary text-xs font-bold font-mono border border-kutty-primary/50 hover:bg-kutty-primary/30 transition-colors">
+                {/* BOTÓN CONTACTO MÓVIL - Usamos etiqueta <a> con onClick manual */}
+                <a 
+                  href="#contact"
+                  onClick={handleScroll}
+                  className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl bg-kutty-primary/20 text-kutty-primary text-xs font-bold font-mono border border-kutty-primary/50 hover:bg-kutty-primary/30 transition-colors cursor-pointer"
+                >
                   <Mail size={14} />
                   EJECUTAR CONTACT.sh
-                </button>
+                </a>
              </div>
           </motion.div>
         )}
