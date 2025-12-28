@@ -156,7 +156,7 @@ export default function BentoGrid() {
       <div className="relative w-32 h-32 md:w-40 md:h-40 group">
         <div className="absolute inset-0 rounded-full bg-kutty-primary/30 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
         <Image
-          src="/logo.png"
+          src="/logo.jpeg"
           alt="KuttyDev"
           fill
           className="object-contain relative z-10 transition-transform duration-500 group-hover:scale-105"

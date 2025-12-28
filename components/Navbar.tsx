@@ -45,7 +45,7 @@ export default function Navbar() {
         >
            <div className="absolute inset-0 bg-kutty-primary/20 opacity-0 group-hover:opacity-100 transition-opacity" />
            <Image 
-             src="/logo.jpg" 
+             src="/logo.jpeg" 
              alt="KD"
              width={24}
              height={24}
