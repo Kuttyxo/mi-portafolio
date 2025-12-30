@@ -1,17 +1,20 @@
 "use client";
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import SpotlightCard from "./SpotlightCard";
 import { 
-  Terminal, 
-  Cpu, 
-  Globe, 
+  GitCommit, 
+  GitBranch, 
+  Users, 
+  Book, 
   Wifi, 
-  Activity, 
   Github, 
   FileText,
-  ShieldCheck,
-  Server
+  Activity,
+  Server,
+  Database,
+  Terminal as TerminalIcon
 } from "lucide-react";
 
 // === CONFIGURACIÓN DE ANIMACIONES ===
@@ -41,7 +44,72 @@ const cardVariants: Variants = {
   }
 };
 
+// === CONFIGURACIÓN ===
+// ¡YA ESTÁ PUESTO TU USUARIO CORRECTO!
+const GITHUB_USERNAME = "Kuttyxo";
+
+// === INTERFAZ DE DATOS GITHUB ===
+interface GithubData {
+  repos: number;
+  followers: number;
+  lastPush: string;
+  status: "Online" | "Offline" | "Fetching";
+}
+
 export default function BentoGrid() {
+  // ESTADO PARA GITHUB
+  const [gitData, setGitData] = useState<GithubData>({
+    repos: 0,
+    followers: 0,
+    lastPush: "Waiting for signal...",
+    status: "Fetching"
+  });
+
+  // EFECTO: FETCH A LA API DE GITHUB
+  useEffect(() => {
+    const fetchGithub = async () => {
+      try {
+        // 1. Datos de Usuario
+        const userRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
+        
+        // Si excediste el límite de la API, lanzará error aquí
+        if (!userRes.ok) throw new Error("Github API Error");
+        
+        const userData = await userRes.json();
+
+        // 2. Últimos Eventos
+        const eventsRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events/public?per_page=1`);
+        const eventsData = await eventsRes.json();
+
+        let lastMessage = "No recent public activity";
+        
+        if (eventsData && Array.isArray(eventsData) && eventsData.length > 0) {
+           const pushEvent = eventsData.find((e: any) => e.type === "PushEvent");
+           if (pushEvent && pushEvent.payload.commits.length > 0) {
+             lastMessage = pushEvent.payload.commits[0].message;
+           } else {
+             // Si el último evento no fue un push (ej: dar like/star), mostramos el tipo
+             lastMessage = eventsData[0].type.replace("Event", "");
+           }
+        }
+
+        setGitData({
+          repos: userData.public_repos || 0,
+          followers: userData.followers || 0,
+          lastPush: lastMessage,
+          status: "Online"
+        });
+
+      } catch (error) {
+        console.error("Github Uplink Failed", error);
+        // Si falla, mostramos Offline pero mantenemos valores en 0
+        setGitData(prev => ({ ...prev, status: "Offline", lastPush: "Connection Failed (Rate Limit?)" }));
+      }
+    };
+
+    fetchGithub();
+  }, []);
+
   return (
     <section id="skills" className="mx-auto max-w-7xl px-4 py-12">
       
@@ -50,8 +118,8 @@ export default function BentoGrid() {
         className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4 lg:grid-rows-2"
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible" // Se anima cuando es visible
-        viewport={{ once: true, margin: "-100px" }} // Se anima solo una vez
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
       >
         
         {/* === CAJA 1: LA TERMINAL (Perfil) === */}
@@ -120,7 +188,7 @@ export default function BentoGrid() {
           </SpotlightCard>
         </motion.div>
 
-        {/* === CAJA 2: SYSTEM MONITOR (Tech Stack) === */}
+        {/* === CAJA 2: SYSTEM MONITOR (Lista Estática) === */}
         <motion.div 
           variants={cardVariants}
           className="col-span-1 md:col-span-1 row-span-1"
@@ -150,7 +218,7 @@ export default function BentoGrid() {
           </SpotlightCard>
         </motion.div>
 
-        {/* === CAJA 3: NETWORK STATUS (Ubicación) === */}
+        {/* === CAJA 3: NETWORK STATUS === */}
         <motion.div 
           variants={cardVariants}
           className="col-span-1 md:col-span-1 row-span-1"
@@ -167,9 +235,7 @@ export default function BentoGrid() {
              </div>
 
              <div className="my-auto text-center py-4 relative overflow-hidden rounded-lg bg-kutty-teal/5 border border-kutty-teal/10">
-                {/* Animación de escáner */}
                 <div className="absolute top-0 left-0 w-full h-[1px] bg-kutty-teal/50 shadow-[0_0_10px_#0D688C] animate-scan" />
-                
                 <h3 className="text-2xl font-bold text-white">SCL-1</h3>
                 <p className="text-xs text-kutty-teal font-mono">Santiago Region</p>
                 <div className="mt-2 text-[10px] text-neutral-500 font-mono flex justify-center gap-4">
@@ -185,50 +251,80 @@ export default function BentoGrid() {
           </SpotlightCard>
         </motion.div>
 
-        {/* === CAJA LOGO / MARCA – PREMIUM === */}
+        {/* === CAJA 4: KUTTYDEV DASHBOARD (Responsiva) === */}
         <motion.div 
           variants={cardVariants}
           className="col-span-1 md:col-span-2 lg:col-span-2 row-span-1"
         >
-          <SpotlightCard className="relative h-full overflow-hidden flex flex-col md:flex-row items-center justify-center md:justify-start px-6 py-8 md:px-10 bg-black">
+          <SpotlightCard className="relative h-full overflow-hidden flex flex-col md:flex-row items-center justify-center md:justify-start px-6 py-6 bg-black">
 
-            {/* Noise */}
+            {/* Noise & Glow */}
             <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-
-            {/* Glow radial */}
             <div className="absolute -left-20 top-1/2 -translate-y-1/2 w-96 h-96 bg-kutty-primary/20 blur-[120px]" />
 
-            {/* CONTENIDO */}
-            <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 md:gap-10 w-full">
+            {/* CONTENIDO PRINCIPAL */}
+            <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 md:gap-8 w-full">
               
-              {/* LOGO */}
-              <div className="relative w-28 h-28 md:w-36 md:h-36 group shrink-0">
-                <div className="absolute inset-0 rounded-full bg-kutty-primary/30 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                <Image
-                  src="/logoo.png"
-                  alt="KuttyDev"
-                  fill
-                  className="object-contain relative z-10 transition-transform duration-500 group-hover:scale-105"
-                />
+              {/* IZQUIERDA: LOGO + MARCA */}
+              <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 shrink-0">
+                {/* Logo */}
+                <div className="relative w-20 h-20 md:w-24 md:h-24 group shrink-0">
+                  <div className="absolute inset-0 rounded-full bg-kutty-primary/30 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <Image
+                    src="/logoosin.png"
+                    alt="KuttyDev"
+                    fill
+                    className="object-contain relative z-10 transition-transform duration-500 group-hover:scale-105 mix-blend-screen"
+                  />
+                </div>
+                
+                {/* Texto de Marca */}
+                <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                   <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
+                     Kutty<span className="text-kutty-primary">Dev</span>
+                   </h2>
+                   <div className="flex items-center gap-2 mt-1 justify-center md:justify-start">
+                      <span className={`w-2 h-2 rounded-full ${gitData.status === "Online" ? "bg-green-500 animate-pulse" : "bg-yellow-500"}`} />
+                      <span className="text-xs text-neutral-400 font-mono uppercase">System {gitData.status}</span>
+                   </div>
+                </div>
               </div>
 
-              {/* TEXTO */}
-              <div className="flex flex-col items-center md:items-start gap-2 border-t md:border-t-0 md:border-l border-neutral-800 pt-6 md:pt-0 md:pl-8 w-full md:w-auto">
-                <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight leading-none text-center md:text-left">
-                  Kutty
-                  <span className="text-kutty-primary">Dev</span>
-                </h2>
+              {/* SEPARADOR: Horizontal en Móvil / Vertical en Desktop */}
+              <div className="w-full h-[1px] bg-white/10 md:w-[1px] md:h-16 md:bg-white/10" />
 
-                <p className="text-[10px] md:text-sm font-mono text-neutral-400 uppercase tracking-[0.25em] text-center md:text-left">
-                  Full Stack Infrastructure
-                </p>
+              {/* DERECHA: GITHUB LIVE STATS */}
+              <div className="flex-1 w-full">
+                 
+                 {/* Stats Grid */}
+                 <div className="grid grid-cols-2 gap-3 md:gap-4 mb-3 md:mb-4">
+                    <div className="bg-white/5 rounded-lg p-3 border border-white/5 hover:border-white/20 transition-colors flex flex-col items-center md:items-start text-center md:text-left">
+                       <div className="flex items-center gap-2 text-neutral-400 mb-1">
+                          <Book size={12} />
+                          <span className="text-[10px] font-mono uppercase">Repositories</span>
+                       </div>
+                       <span className="text-lg font-bold text-white">{gitData.repos}</span>
+                    </div>
+                    <div className="bg-white/5 rounded-lg p-3 border border-white/5 hover:border-white/20 transition-colors flex flex-col items-center md:items-start text-center md:text-left">
+                       <div className="flex items-center gap-2 text-neutral-400 mb-1">
+                          <Users size={12} />
+                          <span className="text-[10px] font-mono uppercase">Followers</span>
+                       </div>
+                       <span className="text-lg font-bold text-white">{gitData.followers}</span>
+                    </div>
+                 </div>
 
-                {/* Línea decorativa */}
-                <div className="mt-4 flex items-center gap-2">
-                  <span className="h-[2px] w-12 bg-kutty-primary shadow-[0_0_12px_#A649BF]" />
-                  <span className="h-[2px] w-3 bg-neutral-700" />
-                  <span className="h-[2px] w-2 bg-neutral-800" />
-                </div>
+                 {/* Last Commit */}
+                 <div className="flex flex-col gap-1 text-center md:text-left">
+                    <div className="flex items-center justify-center md:justify-start gap-2 text-[10px] text-neutral-500 font-mono">
+                       <GitCommit size={12} className="text-kutty-primary" />
+                       LATEST COMMIT UPLINK
+                    </div>
+                    <code className="text-[10px] md:text-xs text-green-400/80 font-mono bg-black/50 px-2 py-1 rounded truncate border border-green-500/10 block w-full">
+                       {gitData.lastPush}
+                    </code>
+                 </div>
+
               </div>
 
             </div>
