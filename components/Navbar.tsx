@@ -77,10 +77,10 @@ export default function Navbar() {
         >
            <div className="absolute inset-0 bg-kutty-primary/20 opacity-0 group-hover:opacity-100 transition-opacity" />
            <Image 
-             src="/logo.jpeg" 
+             src="/logoo.png" 
              alt="KD"
-             width={24}
-             height={24}
+             width={44}
+             height={44}
              className="object-contain opacity-80 group-hover:scale-110 transition-transform duration-300"
            />
         </a>

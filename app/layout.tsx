@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "KuttyDev | Full Stack Infrastructure",
   description: "Portafolio de Cristóbal Rodríguez. Ingeniero Civil en Informática, Backend & DevOps.",
   icons: {
-    icon: "/logo.jpeg",
+    icon: "/logoosin.png",
   },
 };
 
