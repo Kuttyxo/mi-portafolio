@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import SpotlightCard from "./SpotlightCard";
 import { 
@@ -9,21 +9,56 @@ import {
   Wifi, 
   Activity, 
   Github, 
-  Linkedin, 
   FileText,
   ShieldCheck,
   Server
 } from "lucide-react";
 
+// === CONFIGURACIÓN DE ANIMACIONES ===
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    scale: 1,
+    transition: { 
+      type: "spring", 
+      stiffness: 100, 
+      damping: 15,
+      duration: 0.5 
+    }
+  }
+};
+
 export default function BentoGrid() {
   return (
-    // AGREGAMOS id="skills" AQUÍ PARA QUE EL NAVBAR LO ENCUENTRE
     <section id="skills" className="mx-auto max-w-7xl px-4 py-12">
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4 lg:grid-rows-2">
+      
+      {/* Contenedor Principal Animado */}
+      <motion.div 
+        className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4 lg:grid-rows-2"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible" // Se anima cuando es visible
+        viewport={{ once: true, margin: "-100px" }} // Se anima solo una vez
+      >
         
-        {/* === CAJA 1: LA TERMINAL (Perfil) === 
-            Ocupa 2 espacios. Diseñada como una ventana de VS Code / Terminal */}
-        <div className="col-span-1 md:col-span-2 row-span-1 md:row-span-2 relative group">
+        {/* === CAJA 1: LA TERMINAL (Perfil) === */}
+        <motion.div 
+          variants={cardVariants}
+          className="col-span-1 md:col-span-2 row-span-1 md:row-span-2 relative group"
+        >
           <SpotlightCard className="h-full p-0 overflow-hidden bg-[#0a0a0a] border-neutral-800">
             {/* Header de la ventana */}
             <div className="flex items-center justify-between px-4 py-3 bg-neutral-900/80 border-b border-white/5">
@@ -66,25 +101,30 @@ export default function BentoGrid() {
                 </div>
               </div>
 
-              {/* Botones de Acción (Terminal Buttons) */}
+              {/* Botones de Acción */}
               <div className="flex flex-wrap gap-3 mt-6">
-                <a href="https://github.com" target="_blank" className="flex items-center gap-2 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded text-xs font-mono border border-white/10 transition-colors">
+                <a href="https://github.com/Kuttyxo" target="_blank" className="flex items-center gap-2 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded text-xs font-mono border border-white/10 transition-colors">
                   <Github size={14} /> git checkout github
                 </a>
-                <a href="/CV_Cristobal_Rodriguez.pdf"
-                download="CV_Cristobal_Rodriguez.pdf"
-                target="_blank"
-                className="flex items-center gap-2 px-4 py-2 bg-kutty-primary/20 hover:bg-kutty-primary/30 text-kutty-primary rounded text-xs font-mono border border-kutty-primary/50 transition-colors">
+                <a 
+                  href="/CV_Cristobal_Rodriguez.pdf" 
+                  download="CV_Cristobal_Rodriguez.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-kutty-primary/20 hover:bg-kutty-primary/30 text-kutty-primary rounded text-xs font-mono border border-kutty-primary/50 transition-colors"
+                >
                   <FileText size={14} /> ./download_cv.sh
                 </a>
               </div>
             </div>
           </SpotlightCard>
-        </div>
+        </motion.div>
 
-        {/* === CAJA 2: SYSTEM MONITOR (Tech Stack) === 
-            Diseño de lista de procesos activos */}
-        <div className="col-span-1 md:col-span-1 row-span-1">
+        {/* === CAJA 2: SYSTEM MONITOR (Tech Stack) === */}
+        <motion.div 
+          variants={cardVariants}
+          className="col-span-1 md:col-span-1 row-span-1"
+        >
           <SpotlightCard className="h-full p-5 bg-black">
             <div className="flex items-center gap-2 mb-4 text-neutral-400 text-xs font-mono uppercase tracking-widest">
               <Activity size={14} className="text-green-500" /> System Modules
@@ -108,11 +148,13 @@ export default function BentoGrid() {
               ))}
             </div>
           </SpotlightCard>
-        </div>
+        </motion.div>
 
-        {/* === CAJA 3: NETWORK STATUS (Ubicación) === 
-            Reemplazo del mapa por datos de latencia/servidor */}
-        <div className="col-span-1 md:col-span-1 row-span-1">
+        {/* === CAJA 3: NETWORK STATUS (Ubicación) === */}
+        <motion.div 
+          variants={cardVariants}
+          className="col-span-1 md:col-span-1 row-span-1"
+        >
           <SpotlightCard className="h-full p-5 bg-black flex flex-col justify-between">
              <div className="flex items-center justify-between mb-2">
                 <span className="text-neutral-400 text-xs font-mono uppercase tracking-widest flex items-center gap-2">
@@ -141,10 +183,13 @@ export default function BentoGrid() {
                <span>REMOTE: OK</span>
              </div>
           </SpotlightCard>
-        </div>
+        </motion.div>
 
-        {/* === CAJA LOGO / MARCA – PREMIUM (RESPONSIVE FIX) === */}
-        <div className="col-span-1 md:col-span-2 lg:col-span-2 row-span-1">
+        {/* === CAJA LOGO / MARCA – PREMIUM === */}
+        <motion.div 
+          variants={cardVariants}
+          className="col-span-1 md:col-span-2 lg:col-span-2 row-span-1"
+        >
           <SpotlightCard className="relative h-full overflow-hidden flex flex-col md:flex-row items-center justify-center md:justify-start px-6 py-8 md:px-10 bg-black">
 
             {/* Noise */}
@@ -188,9 +233,9 @@ export default function BentoGrid() {
 
             </div>
           </SpotlightCard>
-        </div>
+        </motion.div>
 
-      </div>
+      </motion.div>
     </section>
   );
 }
