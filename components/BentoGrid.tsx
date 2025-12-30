@@ -71,7 +71,10 @@ export default function BentoGrid() {
                 <a href="https://github.com" target="_blank" className="flex items-center gap-2 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded text-xs font-mono border border-white/10 transition-colors">
                   <Github size={14} /> git checkout github
                 </a>
-                <a href="#contact" className="flex items-center gap-2 px-4 py-2 bg-kutty-primary/20 hover:bg-kutty-primary/30 text-kutty-primary rounded text-xs font-mono border border-kutty-primary/50 transition-colors">
+                <a href="/CV_Cristobal_Rodriguez.pdf"
+                download="CV_Cristobal_Rodriguez.pdf"
+                target="_blank"
+                className="flex items-center gap-2 px-4 py-2 bg-kutty-primary/20 hover:bg-kutty-primary/30 text-kutty-primary rounded text-xs font-mono border border-kutty-primary/50 transition-colors">
                   <FileText size={14} /> ./download_cv.sh
                 </a>
               </div>
