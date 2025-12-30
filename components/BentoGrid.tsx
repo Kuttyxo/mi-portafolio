@@ -17,7 +17,8 @@ import {
 
 export default function BentoGrid() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-12">
+    // AGREGAMOS id="skills" AQUÍ PARA QUE EL NAVBAR LO ENCUENTRE
+    <section id="skills" className="mx-auto max-w-7xl px-4 py-12">
       <div className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4 lg:grid-rows-2">
         
         {/* === CAJA 1: LA TERMINAL (Perfil) === 
@@ -139,58 +140,53 @@ export default function BentoGrid() {
           </SpotlightCard>
         </div>
 
-{/* === CAJA LOGO / MARCA – PREMIUM (RESPONSIVE FIX) === */}
-<div className="col-span-1 md:col-span-2 lg:col-span-2 row-span-1">
-  <SpotlightCard className="relative h-full overflow-hidden flex flex-col md:flex-row items-center justify-center md:justify-start px-6 py-8 md:px-10 bg-black">
+        {/* === CAJA LOGO / MARCA – PREMIUM (RESPONSIVE FIX) === */}
+        <div className="col-span-1 md:col-span-2 lg:col-span-2 row-span-1">
+          <SpotlightCard className="relative h-full overflow-hidden flex flex-col md:flex-row items-center justify-center md:justify-start px-6 py-8 md:px-10 bg-black">
 
-    {/* Noise */}
-    <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+            {/* Noise */}
+            <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
-    {/* Glow radial */}
-    <div className="absolute -left-20 top-1/2 -translate-y-1/2 w-96 h-96 bg-kutty-primary/20 blur-[120px]" />
+            {/* Glow radial */}
+            <div className="absolute -left-20 top-1/2 -translate-y-1/2 w-96 h-96 bg-kutty-primary/20 blur-[120px]" />
 
-    {/* CONTENIDO */}
-    {/* Usamos gap-6 en móvil y gap-10 en desktop */}
-    <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 md:gap-10 w-full">
-      
-      {/* LOGO */}
-      {/* shrink-0 evita que el logo se aplaste */}
-      <div className="relative w-28 h-28 md:w-36 md:h-36 group shrink-0">
-        <div className="absolute inset-0 rounded-full bg-kutty-primary/30 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-        <Image
-          src="/logo.jpeg" // Asegúrate que el archivo esté en /public/logo.jpeg
-          alt="KuttyDev"
-          fill
-          className="object-contain relative z-10 transition-transform duration-500 group-hover:scale-105"
-        />
-      </div>
+            {/* CONTENIDO */}
+            <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 md:gap-10 w-full">
+              
+              {/* LOGO */}
+              <div className="relative w-28 h-28 md:w-36 md:h-36 group shrink-0">
+                <div className="absolute inset-0 rounded-full bg-kutty-primary/30 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <Image
+                  src="/logo.jpeg"
+                  alt="KuttyDev"
+                  fill
+                  className="object-contain relative z-10 transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
 
-      {/* TEXTO */}
-      {/* Quitamos 'hidden'. Ahora es flex siempre.
-          En móvil: Centrado y con borde arriba (o sin borde).
-          En desktop: Alineado izquierda y con borde a la izquierda.
-      */}
-      <div className="flex flex-col items-center md:items-start gap-2 border-t md:border-t-0 md:border-l border-neutral-800 pt-6 md:pt-0 md:pl-8 w-full md:w-auto">
-        <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight leading-none text-center md:text-left">
-          Kutty
-          <span className="text-kutty-primary">Dev</span>
-        </h2>
+              {/* TEXTO */}
+              <div className="flex flex-col items-center md:items-start gap-2 border-t md:border-t-0 md:border-l border-neutral-800 pt-6 md:pt-0 md:pl-8 w-full md:w-auto">
+                <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight leading-none text-center md:text-left">
+                  Kutty
+                  <span className="text-kutty-primary">Dev</span>
+                </h2>
 
-        <p className="text-[10px] md:text-sm font-mono text-neutral-400 uppercase tracking-[0.25em] text-center md:text-left">
-          Full Stack Infrastructure
-        </p>
+                <p className="text-[10px] md:text-sm font-mono text-neutral-400 uppercase tracking-[0.25em] text-center md:text-left">
+                  Full Stack Infrastructure
+                </p>
 
-        {/* Línea decorativa */}
-        <div className="mt-4 flex items-center gap-2">
-          <span className="h-[2px] w-12 bg-kutty-primary shadow-[0_0_12px_#A649BF]" />
-          <span className="h-[2px] w-3 bg-neutral-700" />
-          <span className="h-[2px] w-2 bg-neutral-800" />
+                {/* Línea decorativa */}
+                <div className="mt-4 flex items-center gap-2">
+                  <span className="h-[2px] w-12 bg-kutty-primary shadow-[0_0_12px_#A649BF]" />
+                  <span className="h-[2px] w-3 bg-neutral-700" />
+                  <span className="h-[2px] w-2 bg-neutral-800" />
+                </div>
+              </div>
+
+            </div>
+          </SpotlightCard>
         </div>
-      </div>
 
-    </div>
-  </SpotlightCard>
-</div>
       </div>
     </section>
   );
