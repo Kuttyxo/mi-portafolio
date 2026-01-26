@@ -18,7 +18,7 @@ const experience = [
     id: 1,
     role: "Ingeniería Civil en Informática & Telecom.",
     company: "Universidad Diego Portales",
-    date: "2020 - Actualidad",
+    date: "2022 - Actualidad",
     description: "Formación especializada en arquitectura de software, redes de datos y ciberseguridad ofensiva/defensiva.",
     tech: [], // Sin tags para mantenerlo limpio como "base"
     type: "init",
