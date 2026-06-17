@@ -14,10 +14,10 @@ const experience = [
   },
   {
     id: 2,
-    role: "Founder & Full Stack DevOps",
-    company: "BrandConnect (Proyecto Personal)",
+    role: "Full Stack DevOps — Proyecto de Aprendizaje",
+    company: "BrandConnect (Proyecto Personal — En Pausa)",
     date: "2024 - 2025",
-    description: "Desarrollo y orquestación de una plataforma SaaS completa. Implementación de arquitectura moderna utilizando Next.js para el frontend y servicios de backend contenerizados.",
+    description: "Proyecto personal para dominar Docker, CI/CD y arquitectura de microservicios. Desarrollo de una plataforma SaaS con Next.js y servicios de backend contenerizados.",
     tech: ["Docker", "Next.js", "Supabase", "Python", "Git CI/CD", "TailwindCSS"],
     type: "feature",
   },
