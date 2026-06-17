@@ -14,9 +14,14 @@ export default function SpotlightCard({
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!divRef.current) return;
-
     const rect = divRef.current.getBoundingClientRect();
     setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!divRef.current || !e.touches[0]) return;
+    const rect = divRef.current.getBoundingClientRect();
+    setPosition({ x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top });
   };
 
   const handleFocus = () => {
@@ -39,6 +44,7 @@ export default function SpotlightCard({
     <div
       ref={divRef}
       onMouseMove={handleMouseMove}
+      onTouchMove={handleTouchMove}
       onFocus={handleFocus}
       onBlur={handleBlur}
       onMouseEnter={handleMouseEnter}

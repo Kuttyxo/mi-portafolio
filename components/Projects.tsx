@@ -181,7 +181,7 @@ function PiccolaCard() {
           <div className="flex flex-wrap items-center gap-4 mt-4">
             <a
               href="https://lapiccolaeventos.cl"
-              target="_blank"
+              target="_blank" rel="noopener noreferrer"
               className="group flex items-center gap-2 px-6 py-3 rounded-xl bg-[#E8B4B8] text-[#1a1a2e] font-bold transition-all hover:bg-[#f0c4c8] hover:scale-105 active:scale-95 shadow-lg shadow-pink-500/20"
             >
               <ExternalLink size={18} />
@@ -190,7 +190,7 @@ function PiccolaCard() {
             </a>
             <a
               href="https://github.com/Kuttyxo/bot-piccola"
-              target="_blank"
+              target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-medium transition-all hover:bg-white/10 hover:border-white/30"
             >
               <Github size={18} />
@@ -222,7 +222,7 @@ function PiccolaCard() {
                   {mod.icon}
                   <span className="text-xs font-bold">{mod.name}</span>
                 </div>
-                <p className="text-[11px] text-neutral-500 leading-snug">{mod.desc}</p>
+                <p className="text-xs text-neutral-500 leading-snug">{mod.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -294,7 +294,7 @@ function ProjectCard({ project, index }: { project: typeof otherProjects[0]; ind
 
         <div className="flex flex-wrap gap-1.5 mb-5">
           {project.tech.map((t) => (
-            <span key={t} className="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[10px] font-mono text-neutral-400">
+            <span key={t} className="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-xs font-mono text-neutral-400">
               {t}
             </span>
           ))}
@@ -304,7 +304,7 @@ function ProjectCard({ project, index }: { project: typeof otherProjects[0]; ind
           {project.liveUrl && (
             <a
               href={project.liveUrl}
-              target="_blank"
+              target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-xs font-medium transition-colors hover:text-white"
               style={{ color: project.color }}
             >
@@ -315,7 +315,7 @@ function ProjectCard({ project, index }: { project: typeof otherProjects[0]; ind
           {project.githubUrl && (
             <a
               href={project.githubUrl}
-              target="_blank"
+              target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-xs text-neutral-400 font-medium hover:text-white transition-colors"
             >
               <Github size={14} />
@@ -411,7 +411,7 @@ function BrandConnectCard() {
           <div className="flex flex-wrap items-center gap-4 mt-4">
             <a
               href="https://brand-connect-frontend.vercel.app"
-              target="_blank"
+              target="_blank" rel="noopener noreferrer"
               className="group flex items-center gap-2 px-6 py-3 rounded-xl bg-[#F2994B] text-[#2A2859] font-bold transition-all hover:bg-[#ffad66] hover:scale-105 active:scale-95 shadow-lg shadow-orange-500/20"
             >
               <ExternalLink size={18} />
@@ -420,7 +420,7 @@ function BrandConnectCard() {
             </a>
             <a
               href="https://github.com/Kuttyxo/brand-connect"
-              target="_blank"
+              target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-medium transition-all hover:bg-white/10 hover:border-white/30"
             >
               <Github size={18} />
@@ -431,7 +431,7 @@ function BrandConnectCard() {
 
         {/* MOCKUP */}
         <div className="relative flex items-center justify-center min-h-[300px] lg:min-h-full rounded-2xl bg-[#0a0a0a]/50 border border-white/5 overflow-hidden group-hover:border-[#F2994B]/30 transition-colors">
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10" />
+            <div className="absolute inset-0 opacity-10 bg-noise-texture" />
             <div className="absolute inset-0 bg-grid-white/[0.05]" />
 
             <div className="relative w-full max-w-[350px] aspect-[4/5] bg-[#1a1a2e] rounded-xl border border-white/10 shadow-2xl overflow-hidden transform transition-transform duration-700 group-hover:rotate-1 group-hover:scale-105">

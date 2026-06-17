@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { Calendar, GitCommit, GitPullRequest, Box, Server, Database, MessageSquare, Globe } from "lucide-react";
+import { Calendar, GitCommit, GitPullRequest, Box, Server, Database, MessageSquare, Globe, Rocket, GraduationCap } from "lucide-react";
 
 const experience = [
   {
@@ -120,7 +120,7 @@ function TimelineItem({ data, index }: { data: typeof experience[0], index: numb
 
              <h3 className="text-xl font-bold text-white mb-1">{data.role}</h3>
              <p className="text-sm text-neutral-400 font-mono mb-4 flex items-center gap-2">
-                {isFeature ? "🚀" : "🎓"} {data.company}
+                {isFeature ? <Rocket size={14} className="shrink-0" /> : <GraduationCap size={14} className="shrink-0" />} {data.company}
              </p>
 
              <p className="text-neutral-300 text-sm leading-relaxed mb-4">
@@ -131,7 +131,7 @@ function TimelineItem({ data, index }: { data: typeof experience[0], index: numb
              {data.tech.length > 0 && (
                <div className="flex flex-wrap gap-2 pt-2 border-t border-white/5">
                  {data.tech.map((t: string) => (
-                   <span key={t} className="flex items-center gap-1 text-[10px] px-2 py-1 rounded bg-white/5 border border-white/5 text-neutral-400 font-mono group-hover:text-white transition-colors">
+                   <span key={t} className="flex items-center gap-1 text-xs px-2 py-1 rounded bg-white/5 border border-white/5 text-neutral-400 font-mono group-hover:text-white transition-colors">
                      {t === "Docker" && <Box size={10} className="text-blue-400"/>}
                      {t === "Supabase" && <Database size={10} className="text-green-400"/>}
                      {t === "Python" && <Server size={10} className="text-yellow-400"/>}

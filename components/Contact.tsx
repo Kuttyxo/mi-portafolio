@@ -45,7 +45,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-32 px-4 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none" />
+      <div className="absolute inset-0 opacity-20 pointer-events-none bg-noise-texture" />
       
       <div className="max-w-4xl mx-auto relative z-10">
         
@@ -95,13 +95,14 @@ export default function Contact() {
                           <Mail size={18} />
                        </div>
                        <div className="flex flex-col">
-                          <span className="text-[10px] text-neutral-500 uppercase font-mono">Direct Message</span>
+                          <span className="text-xs text-neutral-500 uppercase font-mono">Direct Message</span>
                           <span className="text-sm text-white font-medium break-all">{email}</span>
                        </div>
                     </div>
-                    <button 
+                    <button
                       onClick={handleCopy}
-                      className="p-2 rounded-lg hover:bg-white/10 text-neutral-400 transition-colors shrink-0"
+                      aria-label="Copiar correo electrónico"
+                      className="p-2 rounded-lg hover:bg-white/10 active:scale-95 text-neutral-400 transition-all shrink-0"
                     >
                       {copied ? <Check size={16} className="text-green-400" /> : <Copy size={16} />}
                     </button>
@@ -160,13 +161,15 @@ export default function Contact() {
                 
                 {/* Input Nombre */}
                 <div>
-                   <label className="block text-[#4af626] mb-1">$ identify user</label>
+                   <label htmlFor="contact-name" className="block text-[#4af626] mb-1">$ identify user</label>
                    <div className="flex items-center gap-2 border-b border-white/10 focus-within:border-[#4af626] pb-1 transition-colors">
                       <span className="text-neutral-500">{'>'}</span>
-                      <input 
+                      <input
+                        id="contact-name"
                         name="name"
-                        type="text" 
-                        placeholder="Tu Nombre / Empresa" 
+                        type="text"
+                        placeholder="Tu Nombre / Empresa"
+                        aria-label="Tu nombre o empresa"
                         className="bg-transparent w-full focus:outline-none text-white placeholder-neutral-600"
                         required
                         disabled={formStatus === 'submitting'}
@@ -176,13 +179,15 @@ export default function Contact() {
 
                 {/* Input Email */}
                 <div>
-                   <label className="block text-[#4af626] mb-1">$ set return_address</label>
+                   <label htmlFor="contact-email" className="block text-[#4af626] mb-1">$ set return_address</label>
                    <div className="flex items-center gap-2 border-b border-white/10 focus-within:border-[#4af626] pb-1 transition-colors">
                       <span className="text-neutral-500">{'>'}</span>
-                      <input 
+                      <input
+                        id="contact-email"
                         name="email"
-                        type="email" 
-                        placeholder="tu@email.com" 
+                        type="email"
+                        placeholder="tu@email.com"
+                        aria-label="Tu correo electrónico"
                         className="bg-transparent w-full focus:outline-none text-white placeholder-neutral-600"
                         required
                         disabled={formStatus === 'submitting'}
@@ -192,13 +197,15 @@ export default function Contact() {
 
                 {/* Textarea Mensaje */}
                 <div>
-                   <label className="block text-[#4af626] mb-1">$ write payload</label>
+                   <label htmlFor="contact-message" className="block text-[#4af626] mb-1">$ write payload</label>
                    <div className="flex gap-2 border-b border-white/10 focus-within:border-[#4af626] pb-1 transition-colors">
                       <span className="text-neutral-500 mt-1">{'>'}</span>
-                      <textarea 
+                      <textarea
+                        id="contact-message"
                         name="message"
                         rows={3}
-                        placeholder="Escribe tu mensaje aquí..." 
+                        placeholder="Escribe tu mensaje aquí..."
+                        aria-label="Tu mensaje"
                         className="bg-transparent w-full focus:outline-none text-white resize-none placeholder-neutral-600"
                         required
                         disabled={formStatus === 'submitting'}
@@ -239,7 +246,7 @@ export default function Contact() {
 
         <div className="mt-20 border-t border-white/5 pt-8 text-center">
             <p className="text-neutral-600 text-xs font-mono">
-               © 2025 KuttyDev. All systems operational. <br/>
+               © {new Date().getFullYear()} KuttyDev. All systems operational. <br/>
                Built with Next.js + Tailwind + Passion.
             </p>
         </div>
