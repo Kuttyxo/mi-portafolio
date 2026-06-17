@@ -45,7 +45,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-32 px-4 relative overflow-hidden">
-      <div className="absolute inset-0 opacity-20 pointer-events-none bg-noise-texture" />
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none" />
       
       <div className="max-w-4xl mx-auto relative z-10">
         

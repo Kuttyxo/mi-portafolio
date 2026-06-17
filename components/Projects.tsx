@@ -431,7 +431,7 @@ function BrandConnectCard() {
 
         {/* MOCKUP */}
         <div className="relative flex items-center justify-center min-h-[300px] lg:min-h-full rounded-2xl bg-[#0a0a0a]/50 border border-white/5 overflow-hidden group-hover:border-[#F2994B]/30 transition-colors">
-            <div className="absolute inset-0 opacity-10 bg-noise-texture" />
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10" />
             <div className="absolute inset-0 bg-grid-white/[0.05]" />
 
             <div className="relative w-full max-w-[350px] aspect-[4/5] bg-[#1a1a2e] rounded-xl border border-white/10 shadow-2xl overflow-hidden transform transition-transform duration-700 group-hover:rotate-1 group-hover:scale-105">

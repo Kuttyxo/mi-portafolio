@@ -73,11 +73,13 @@ export default function BentoGrid() {
     if (cached) {
       try {
         const { data, timestamp } = JSON.parse(cached);
-        if (Date.now() - timestamp < CACHE_TTL) {
+        if (Date.now() - timestamp < CACHE_TTL && data.status === "Online" && data.repos > 0) {
           setGitData(data);
           return;
         }
-      } catch {}
+      } catch {
+        localStorage.removeItem(CACHE_KEY);
+      }
     }
 
     const fetchGithub = async () => {
@@ -266,7 +268,7 @@ export default function BentoGrid() {
           <SpotlightCard className="relative h-full overflow-hidden flex flex-col md:flex-row items-center justify-center md:justify-start px-6 py-6 bg-black">
 
             {/* Noise & Glow */}
-            <div className="absolute inset-0 opacity-20 bg-noise-texture" />
+            <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
             <div className="absolute -left-20 top-1/2 -translate-y-1/2 w-96 h-96 bg-kutty-primary/20 blur-[120px]" />
 
             {/* CONTENIDO PRINCIPAL */}
