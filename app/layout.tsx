@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "KuttyDev | Full Stack Infrastructure",
-  description: "Portafolio de Cristóbal Rodríguez. Ingeniero Civil en Informática, Backend & DevOps.",
+  description: "Portafolio de Cristóbal Rodríguez. Ingeniero Civil en Informática, Full Stack Developer & DevOps. Freelance en automatizaciones y plataformas web.",
   icons: {
     icon: "/logoosin.png",
   },

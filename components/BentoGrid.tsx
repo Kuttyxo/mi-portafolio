@@ -153,16 +153,16 @@ export default function BentoGrid() {
                     Cristóbal Rodríguez
                   </h1>
                   <p className="text-lg text-neutral-400 font-light">
-                    Ingeniero Civil en Informática & Telecomunicaciones en formación.
+                    Ingeniero Civil en Informática & Telecomunicaciones en formación. Desarrollador freelance de soluciones web y automatizaciones.
                   </p>
                 </div>
 
                 {/* Bloque de Bio (JSON Style) */}
                 <div className="font-mono text-xs md:text-sm bg-neutral-900/50 p-4 rounded-lg border border-white/5 text-neutral-300 overflow-x-auto">
                   <p><span className="text-purple-400">const</span> <span className="text-yellow-200">developer</span> = &#123;</p>
-                  <p className="pl-4">role: <span className="text-green-300">"Backend & DevOps"</span>,</p>
-                  <p className="pl-4">security: <span className="text-green-300">"Ofensiva / Pentesting"</span>,</p>
-                  <p className="pl-4">status: <span className="text-blue-300">"Open to Work"</span>,</p>
+                  <p className="pl-4">role: <span className="text-green-300">"Full Stack & DevOps"</span>,</p>
+                  <p className="pl-4">focus: <span className="text-green-300">"Automatización & APIs"</span>,</p>
+                  <p className="pl-4">status: <span className="text-blue-300">"Freelance Activo"</span>,</p>
                   <p className="pl-4">location: <span className="text-orange-300">"Santiago, CL"</span>,</p>
                   <p className="pl-4">university: <span className="text-red-200">"Universidad Diego Portales"</span>,</p>
                   <p>&#125;;</p>
@@ -202,9 +202,9 @@ export default function BentoGrid() {
               {[
                 { name: "Docker Container", status: "Running", color: "bg-blue-500" },
                 { name: "Next.js Framework", status: "Active", color: "bg-white" },
-                { name: "Python Scripts", status: "Loaded", color: "bg-yellow-400" },
-                { name: "PostgreSQL DB", status: "Connected", color: "bg-blue-300" },
-                { name: "Burp Suite", status: "Scanning", color: "bg-orange-500" },
+                { name: "FastAPI / Python", status: "Loaded", color: "bg-yellow-400" },
+                { name: "Supabase / PostgreSQL", status: "Connected", color: "bg-green-400" },
+                { name: "WhatsApp Bot API", status: "Listening", color: "bg-emerald-500" },
               ].map((item, i) => (
                 <div key={i} className="flex items-center justify-between text-xs p-2 rounded bg-white/5 border border-white/5 hover:border-white/20 transition-colors">
                   <span className="text-neutral-300 font-mono">{item.name}</span>
