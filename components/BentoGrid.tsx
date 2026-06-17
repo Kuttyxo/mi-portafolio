@@ -65,44 +65,51 @@ export default function BentoGrid() {
     status: "Fetching"
   });
 
-  // EFECTO: FETCH A LA API DE GITHUB
   useEffect(() => {
+    const CACHE_KEY = "github_data";
+    const CACHE_TTL = 5 * 60 * 1000;
+
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (cached) {
+      try {
+        const { data, timestamp } = JSON.parse(cached);
+        if (Date.now() - timestamp < CACHE_TTL) {
+          setGitData(data);
+          return;
+        }
+      } catch {}
+    }
+
     const fetchGithub = async () => {
       try {
-        // 1. Datos de Usuario
         const userRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
-        
-        // Si excediste el límite de la API, lanzará error aquí
         if (!userRes.ok) throw new Error("Github API Error");
-        
         const userData = await userRes.json();
 
-        // 2. Últimos Eventos
         const eventsRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events/public?per_page=1`);
         const eventsData = await eventsRes.json();
 
         let lastMessage = "No recent public activity";
-        
         if (eventsData && Array.isArray(eventsData) && eventsData.length > 0) {
            const pushEvent = eventsData.find((e: any) => e.type === "PushEvent");
            if (pushEvent && pushEvent.payload.commits.length > 0) {
              lastMessage = pushEvent.payload.commits[0].message;
            } else {
-             // Si el último evento no fue un push (ej: dar like/star), mostramos el tipo
              lastMessage = eventsData[0].type.replace("Event", "");
            }
         }
 
-        setGitData({
+        const freshData: GithubData = {
           repos: userData.public_repos || 0,
           followers: userData.followers || 0,
           lastPush: lastMessage,
           status: "Online"
-        });
+        };
 
+        setGitData(freshData);
+        localStorage.setItem(CACHE_KEY, JSON.stringify({ data: freshData, timestamp: Date.now() }));
       } catch (error) {
         console.error("Github Uplink Failed", error);
-        // Si falla, mostramos Offline pero mantenemos valores en 0
         setGitData(prev => ({ ...prev, status: "Offline", lastPush: "Connection Failed (Rate Limit?)" }));
       }
     };
@@ -135,7 +142,7 @@ export default function BentoGrid() {
                 <div className="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
                 <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50" />
               </div>
-              <div className="text-[10px] font-mono text-neutral-500">profile.tsx — kuttydev</div>
+              <div className="text-xs font-mono text-neutral-500">profile.tsx — kuttydev</div>
             </div>
 
             {/* Contenido Terminal */}
@@ -171,7 +178,7 @@ export default function BentoGrid() {
 
               {/* Botones de Acción */}
               <div className="flex flex-wrap gap-3 mt-6">
-                <a href="https://github.com/Kuttyxo" target="_blank" className="flex items-center gap-2 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded text-xs font-mono border border-white/10 transition-colors">
+                <a href="https://github.com/Kuttyxo" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded text-xs font-mono border border-white/10 transition-colors">
                   <Github size={14} /> git checkout github
                 </a>
                 <a 
@@ -210,7 +217,7 @@ export default function BentoGrid() {
                   <span className="text-neutral-300 font-mono">{item.name}</span>
                   <div className="flex items-center gap-1.5">
                     <span className={`w-1.5 h-1.5 rounded-full ${item.color} shadow-[0_0_5px_currentColor]`}></span>
-                    <span className="text-[10px] text-neutral-500">{item.status}</span>
+                    <span className="text-xs text-neutral-500">{item.status}</span>
                   </div>
                 </div>
               ))}
@@ -238,13 +245,13 @@ export default function BentoGrid() {
                 <div className="absolute top-0 left-0 w-full h-[1px] bg-kutty-teal/50 shadow-[0_0_10px_#0D688C] animate-scan" />
                 <h3 className="text-2xl font-bold text-white">SCL-1</h3>
                 <p className="text-xs text-kutty-teal font-mono">Santiago Region</p>
-                <div className="mt-2 text-[10px] text-neutral-500 font-mono flex justify-center gap-4">
+                <div className="mt-2 text-xs text-neutral-500 font-mono flex justify-center gap-4">
                   <span>PING: 4ms</span>
                   <span>UP: 99.9%</span>
                 </div>
              </div>
 
-             <div className="mt-2 flex items-center justify-between text-[10px] text-neutral-600 font-mono border-t border-white/5 pt-2">
+             <div className="mt-2 flex items-center justify-between text-xs text-neutral-600 font-mono border-t border-white/5 pt-2">
                <span>IPV4: 192.168.1.X</span>
                <span>REMOTE: OK</span>
              </div>
@@ -259,7 +266,7 @@ export default function BentoGrid() {
           <SpotlightCard className="relative h-full overflow-hidden flex flex-col md:flex-row items-center justify-center md:justify-start px-6 py-6 bg-black">
 
             {/* Noise & Glow */}
-            <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+            <div className="absolute inset-0 opacity-20 bg-noise-texture" />
             <div className="absolute -left-20 top-1/2 -translate-y-1/2 w-96 h-96 bg-kutty-primary/20 blur-[120px]" />
 
             {/* CONTENIDO PRINCIPAL */}
@@ -301,14 +308,14 @@ export default function BentoGrid() {
                     <div className="bg-white/5 rounded-lg p-3 border border-white/5 hover:border-white/20 transition-colors flex flex-col items-center md:items-start text-center md:text-left">
                        <div className="flex items-center gap-2 text-neutral-400 mb-1">
                           <Book size={12} />
-                          <span className="text-[10px] font-mono uppercase">Repositories</span>
+                          <span className="text-xs font-mono uppercase">Repositories</span>
                        </div>
                        <span className="text-lg font-bold text-white">{gitData.repos}</span>
                     </div>
                     <div className="bg-white/5 rounded-lg p-3 border border-white/5 hover:border-white/20 transition-colors flex flex-col items-center md:items-start text-center md:text-left">
                        <div className="flex items-center gap-2 text-neutral-400 mb-1">
                           <Users size={12} />
-                          <span className="text-[10px] font-mono uppercase">Followers</span>
+                          <span className="text-xs font-mono uppercase">Followers</span>
                        </div>
                        <span className="text-lg font-bold text-white">{gitData.followers}</span>
                     </div>
@@ -316,11 +323,11 @@ export default function BentoGrid() {
 
                  {/* Last Commit */}
                  <div className="flex flex-col gap-1 text-center md:text-left">
-                    <div className="flex items-center justify-center md:justify-start gap-2 text-[10px] text-neutral-500 font-mono">
+                    <div className="flex items-center justify-center md:justify-start gap-2 text-xs text-neutral-500 font-mono">
                        <GitCommit size={12} className="text-kutty-primary" />
                        LATEST COMMIT UPLINK
                     </div>
-                    <code className="text-[10px] md:text-xs text-green-400/80 font-mono bg-black/50 px-2 py-1 rounded truncate border border-green-500/10 block w-full">
+                    <code className="text-xs md:text-xs text-green-400/80 font-mono bg-black/50 px-2 py-1 rounded truncate border border-green-500/10 block w-full">
                        {gitData.lastPush}
                     </code>
                  </div>

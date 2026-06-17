@@ -12,7 +12,7 @@ export default function Home() {
       
       <Navbar />
       
-      <div className="relative z-10 pt-12 md:pt-14 pb-20 px-4 md:px-8 space-y-32">
+      <div className="relative z-10 pt-24 md:pt-28 pb-20 px-4 md:px-8 space-y-32">
         <BentoGrid />
         <Projects /> 
         <Experience />
