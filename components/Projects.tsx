@@ -47,13 +47,13 @@ export default function Projects() {
           className="mb-12 md:text-center max-w-3xl mx-auto"
         >
           <h2 className="text-sm font-bold tracking-widest text-kutty-teal uppercase mb-3">
-            Flagship Project
+            Proyecto de Aprendizaje
           </h2>
           <h3 className="text-3xl md:text-5xl font-bold text-white mb-6">
-            Innovación en Desarrollo
+            Laboratorio DevOps
           </h3>
           <p className="text-neutral-400 text-lg">
-            Un marketplace de última generación que automatiza la conexión entre marcas y creadores mediante <span className="text-white font-medium">DevOps</span> y <span className="text-white font-medium">Análisis de Datos</span>.
+            Proyecto personal construido para dominar <span className="text-white font-medium">Docker</span>, <span className="text-white font-medium">CI/CD</span> y arquitecturas de microservicios. Actualmente en pausa.
           </p>
         </motion.div>
 
@@ -383,14 +383,14 @@ function BrandConnectCard() {
                 Brand<span className="text-[#F2994B]">Connect</span>
               </h1>
               <p className="text-sm font-mono text-neutral-400 tracking-wide uppercase">
-                Marketplace Automatizado
+                Marketplace — En Pausa
               </p>
             </div>
           </div>
 
           <p className="text-neutral-300 text-lg leading-relaxed">
-            Plataforma que disrumpe el mercado de agencias tradicionales mediante automatización.
-            Conecta marcas con micro-influencers verificados, gestionando campañas, pagos y métricas de ROI en tiempo real.
+            Proyecto personal para poner a prueba mis habilidades en Docker, DevOps y arquitectura de microservicios.
+            Un marketplace que conecta marcas con micro-influencers, gestionando campañas, pagos y métricas de ROI.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
@@ -475,8 +475,8 @@ function BrandConnectCard() {
                 </div>
             </div>
 
-            <div className="absolute bottom-6 right-6 px-4 py-2 rounded-full bg-black/80 backdrop-blur-md border border-[#F2994B]/50 text-[#F2994B] text-xs font-bold shadow-xl">
-               v1.0 LIVE
+            <div className="absolute bottom-6 right-6 px-4 py-2 rounded-full bg-black/80 backdrop-blur-md border border-yellow-500/50 text-yellow-400 text-xs font-bold shadow-xl">
+               EN PAUSA
             </div>
         </div>
       </div>
