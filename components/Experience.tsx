@@ -8,8 +8,8 @@ const experience = [
     role: "Desarrollador Full Stack Freelance",
     company: "La Piccola Eventos & Centro de Eventos Dominga",
     date: "2025 - Actualidad",
-    description: "Desarrollo integral de plataformas web y automatizaciones para empresas de eventos. Creación de sitio corporativo multi-sede, chatbot de WhatsApp con cotización automática vía API de Meta, y landing pages con mapas interactivos.",
-    tech: ["Python", "FastAPI", "Supabase", "WhatsApp API", "Leaflet.js", "Vercel"],
+    description: "Diseño y desarrollo de plataforma CRM integral: chatbot WhatsApp con cotización automática, sistema de propuestas con firma digital, pipeline de ventas, gestión de pagos y contratos, notificaciones triple canal (WhatsApp + Email + Cron). Además, sitio corporativo multi-sede y landing con mapa interactivo.",
+    tech: ["Python", "FastAPI", "Supabase", "WhatsApp API", "Vercel", "Resend"],
     type: "feature",
   },
   {
