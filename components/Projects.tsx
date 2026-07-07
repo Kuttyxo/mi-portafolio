@@ -1,6 +1,6 @@
 "use client";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
-import { ExternalLink, Github, Zap, ShieldCheck, BarChart3, Users, ArrowRight, Bot, Globe, MapPin, MessageSquare, CalendarDays, Utensils, Wallet, Mic, FileText, CreditCard, PieChart, BellRing, ClipboardList, Building2 } from "lucide-react";
+import { ExternalLink, Github, Zap, ShieldCheck, BarChart3, Users, ArrowRight, Bot, Globe, MapPin, MessageSquare, CalendarDays, Utensils, Wallet, Mic, FileText, CreditCard, PieChart, BellRing, ClipboardList, Building2, Trophy, Car, Database } from "lucide-react";
 
 const otherProjects = [
   {
@@ -32,7 +32,24 @@ const otherProjects = [
       { icon: <Globe size={14} />, text: "Red de salones aliados" },
     ],
   },
+  {
+    title: "Pricing Inteligente Autos",
+    subtitle: "2° Lugar Feria Data Science UDP",
+    description: "Clasificación de autos usados como subvalorados, precio justo o sobrevalorados usando XGBoost con umbrales calibrados. Pipeline de +34K registros de 7 portales chilenos. Mi rol: Data Engineer (preprocesamiento, limpieza multi-fuente, IQR, feature engineering, control de data leakage). Explicabilidad con SHAP.",
+    tech: ["Python", "XGBoost", "scikit-learn", "pandas", "SHAP"],
+    color: "#F59E0B",
+    icon: <Car size={20} />,
+    liveUrl: "https://gamma.app/docs/7h2r3txrxc5h6i8",
+    githubUrl: "https://github.com/GasparMCS/Pricing-de-Autos",
+    liveLabel: "Presentación",
+    features: [
+      { icon: <Trophy size={14} />, text: "2° Lugar — Feria UDP julio 2026" },
+      { icon: <Database size={14} />, text: "+34K registros de 7 portales" },
+      { icon: <BarChart3 size={14} />, text: "Explicabilidad con SHAP" },
+    ],
+  },
 ];
+
 
 export default function Projects() {
   return (
@@ -309,7 +326,7 @@ function ProjectCard({ project, index }: { project: typeof otherProjects[0]; ind
               style={{ color: project.color }}
             >
               <ExternalLink size={14} />
-              Ver Sitio
+              {project.liveLabel || "Ver Sitio"}
             </a>
           )}
           {project.githubUrl && (
