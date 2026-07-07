@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { Calendar, GitCommit, GitPullRequest, Box, Server, Database, MessageSquare, Globe, Rocket, GraduationCap } from "lucide-react";
+import { Calendar, GitCommit, GitPullRequest, Box, Server, Database, MessageSquare, Globe, Rocket, GraduationCap, Trophy } from "lucide-react";
 
 const experience = [
   {
@@ -20,6 +20,15 @@ const experience = [
     description: "Proyecto personal para dominar Docker, CI/CD y arquitectura de microservicios. Desarrollo de una plataforma SaaS con Next.js y servicios de backend contenerizados.",
     tech: ["Docker", "Next.js", "Supabase", "Python", "Git CI/CD", "TailwindCSS"],
     type: "feature",
+  },
+  {
+    id: 1.5,
+    role: "2° Lugar — Feria de Proyectos Data Science",
+    company: "Universidad Diego Portales",
+    date: "Julio 2026",
+    description: "Proyecto \"Pricing Inteligente de Autos Usados en Chile\": clasificación de vehículos como subvalorados o sobrevalorados con XGBoost y +34.000 registros de 7 portales. Mi rol: Data Engineer — pipeline de preprocesamiento, limpieza multi-fuente, IQR, feature engineering y control de data leakage.",
+    tech: ["Python", "XGBoost", "scikit-learn", "pandas", "SHAP"],
+    type: "award",
   },
   {
     id: 1,
@@ -81,12 +90,19 @@ function TimelineItem({ data, index }: { data: typeof experience[0], index: numb
   const isEven = index % 2 === 0;
 
   const isFeature = data.type === 'feature';
+  const isAward = data.type === 'award';
 
-  const colorClass = isFeature ? "text-green-400 bg-green-500/10 border-green-500/20" : "text-purple-400 bg-purple-500/10 border-purple-500/20";
-  const glowClass = isFeature ? "from-green-500/5 to-emerald-500/5" : "from-purple-500/5 to-blue-500/5";
-  const dotColor = isFeature ? "bg-green-500 shadow-[0_0_20px_#22c55e]" : "bg-purple-500 shadow-[0_0_20px_#a855f7]";
+  const colorClass = isAward
+    ? "text-amber-400 bg-amber-500/10 border-amber-500/20"
+    : isFeature ? "text-green-400 bg-green-500/10 border-green-500/20" : "text-purple-400 bg-purple-500/10 border-purple-500/20";
+  const glowClass = isAward
+    ? "from-amber-500/5 to-yellow-500/5"
+    : isFeature ? "from-green-500/5 to-emerald-500/5" : "from-purple-500/5 to-blue-500/5";
+  const dotColor = isAward
+    ? "bg-amber-500 shadow-[0_0_20px_#f59e0b]"
+    : isFeature ? "bg-green-500 shadow-[0_0_20px_#22c55e]" : "bg-purple-500 shadow-[0_0_20px_#a855f7]";
 
-  const commitTag = index === 0 ? "HEAD" : isFeature ? `DEPLOY_v${data.id}.0` : "INITIAL_COMMIT";
+  const commitTag = index === 0 ? "HEAD" : isAward ? "AWARD" : isFeature ? `DEPLOY_v${data.id}.0` : "INITIAL_COMMIT";
 
   return (
     <motion.div
@@ -109,7 +125,7 @@ function TimelineItem({ data, index }: { data: typeof experience[0], index: numb
 
                {/* TAG DE COMMIT */}
                <div className={`flex items-center gap-2 text-xs font-mono px-2 py-1 rounded border ${colorClass}`}>
-                 {isFeature ? <GitPullRequest size={12} /> : <GitCommit size={12} />}
+                 {isAward ? <Trophy size={12} /> : isFeature ? <GitPullRequest size={12} /> : <GitCommit size={12} />}
                  <span>{commitTag}</span>
                </div>
 
@@ -120,7 +136,7 @@ function TimelineItem({ data, index }: { data: typeof experience[0], index: numb
 
              <h3 className="text-xl font-bold text-white mb-1">{data.role}</h3>
              <p className="text-sm text-neutral-400 font-mono mb-4 flex items-center gap-2">
-                {isFeature ? <Rocket size={14} className="shrink-0" /> : <GraduationCap size={14} className="shrink-0" />} {data.company}
+                {isAward ? <Trophy size={14} className="shrink-0" /> : isFeature ? <Rocket size={14} className="shrink-0" /> : <GraduationCap size={14} className="shrink-0" />} {data.company}
              </p>
 
              <p className="text-neutral-300 text-sm leading-relaxed mb-4">
